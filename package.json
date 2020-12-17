@@ -13,6 +13,7 @@
     "express-handlebars": "^5.2.0",
     "handlebars": "^4.7.6",
     "passport": "^0.4.1",
+    "sql-template-strings": "^2.2.2",
     "sqlite": "^4.0.18",
     "sqlite3": "^5.0.0"
   },

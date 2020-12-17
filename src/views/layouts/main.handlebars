@@ -12,22 +12,29 @@
 <body>
     <script defer src="/static/vendor/bootstrap.bundle.min.js"></script>
 
-    <div class="container">
-        <div class="row">
-            <header class="app-header col-xl">
+    <div class="main-container container d-flex flex-column">
+        <header class="row">
+            <div class="app-header col-xl">
                 <div class="row">
                     <div class="col-auto flex-grow-1">Electronics Forum</div>
                     <div class="col-auto">login</div>
                 </div>
-            </header>
-        </div>
+            </div>
+        </header>
         {{{body}}}
+
+        <footer class="row mt-auto">
+            <div class="col">
+                footer
+            </div>
+        </footer>
     </div>
 
     {{#if debug}}
-    debug
     <script src="/reload/reload.js"></script>
     {{/if}}
+
+
 </body>
 
 </html>

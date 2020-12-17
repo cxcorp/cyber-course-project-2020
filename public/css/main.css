@@ -11,8 +11,7 @@ body {
 }
 
 body > .container {
-  min-height: 100vh;
-  padding: 0 0.5rem;
+  
 }
 
 a {
@@ -26,5 +25,13 @@ a {
 
 .app-header {
     background: #ddd;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
+}
+
+.main-container {
+  min-height: 100vh;
+  margin-top: 10rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+  box-sizing: content-box;
 }
