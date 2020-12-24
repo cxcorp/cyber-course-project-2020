@@ -43,20 +43,24 @@ If it still doesn't work, see section "Run with Docker".
 
 ### Running
 
-After dependencies have been installed, run `npm start`. This will start the app at http://localhost:3000. If port 3000 is taken, change the port via environment variables by doing
+After dependencies have been installed, run `npm start`. This will start the app at http://localhost:3000. If port 3000 is taken, change the port via environment variables by doing (on Linux or macOS):
 
-```
+```sh
 APP_PORT=3001 npm start
 ```
 
-on Linux and macOS, or 
+or on Windows:
 
-```
-set APP_PORT=3001
+```sh
+# cmd.exe:
+set APP_PORT="3001"
+# powershell:
+$env:APP_PORT="3001"
+
 npm start
 ```
 
-on Windows.
+
 
 See sample user credentials in `seeds/001-dummy-data.sql`.
 
