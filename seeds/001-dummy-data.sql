@@ -1,10 +1,12 @@
 INSERT INTO users (id, username, password) VALUES
     (1, 'Eric', 'eric123'),
     (2, 'soldermaster123', 'soldermaster'),
-    (3, 'tom_from_work', 'itstom');
+    (3, 'tom_from_work', 'itstom'),
+    (4, 'cx', 'cx');
 
 INSERT INTO threads (id, author_id, create_date, title) VALUES
-    (1, 1, 1608218220234, 'New Hantek DSO2X1X models?');
+    (1, 1, 1608218220234, 'New Hantek DSO2X1X models?'),
+    (2, 4, 1608826559317, 'DS1054z experiences?');
 
 INSERT INTO thread_replies (id, thread_id, author_id, reply_date, content) VALUES
     (1, 1, 2, 1608218220234, 'Hi,
@@ -30,4 +32,5 @@ What''s not clear to me is what the 12-bit resolution refers to. Some say it''s 
 
 What I like also is that it comes with serial decoding.
 
-I have very little experience with oscillos. I''ll give more info when I have the chance to play with it.');
+I have very little experience with oscillos. I''ll give more info when I have the chance to play with it.'),
+    (5, 2, 4, 1608826559317, replace(replace('Hey all,\r\n\r\nI''m looking to get a beginner level scope and saw EEVBlog''s video on the DS1054z - the video is quite convincing but it''s also a few years old already. Is the DS1054z still the de-facto hobbyist scope or is there a newer scope with better features around the same price point?','\r',char(13)),'\n',char(10)));

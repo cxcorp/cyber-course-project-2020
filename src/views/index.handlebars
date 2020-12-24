@@ -2,7 +2,7 @@
 <p>This forum is for electronics enthusiasts. Feel free to say hello!</p>
 <br />
 
-<table>
+<table class="thread-table">
     <thead>
         <tr>
             <th></th>
@@ -13,10 +13,20 @@
     </thead>
     <tbody>
         {{#each threads}}
-        <td>▣</td>
-        <td><a class="topic-list__link" href="{{thread_href id}}">{{title}}</a></td>
-        <td>{{author_name}}</td>
-        <td>{{stringify_thread_timestamp create_date}}</td>
+        <tr>
+            <td>▣</td>
+            <td><a class="topic-list__link" href="{{thread_href id}}">{{title}}</a></td>
+            <td>{{author_name}}</td>
+            <td>{{stringify_thread_timestamp create_date}}</td>
+        </tr>
         {{/each}}
     </tbody>
 </table>
+
+{{#if user}}
+<div class="row">
+    <div class="col">
+        <a href="/topics/new" class="btn btn-primary">Create a new topic</a>
+    </div>
+</div>
+{{/if}}

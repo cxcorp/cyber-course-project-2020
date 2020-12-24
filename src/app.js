@@ -85,7 +85,7 @@ const attachApp = (app, db) => {
           ON u.id = t.author_id
       ORDER BY t.create_date DESC
     `);
-    console.log(threads);
+
     res.render("index", { threads });
   });
 
@@ -189,7 +189,7 @@ const attachApp = (app, db) => {
       SELECT COUNT(*) AS count FROM users
       WHERE username = ${username}
     `);
-    console.log("usernameTaken", usernameTaken);
+
     if (usernameTaken > 0) {
       req.flash("error", "Username is already taken.");
       return res.redirect("/register");
@@ -216,6 +216,48 @@ const attachApp = (app, db) => {
       );
       res.redirect("/");
     });
+  });
+
+  app.get("/topics/new", requireLoggedIn, async (req, res) => {
+    res.render("threads/new");
+  });
+
+  app.post("/topics/new", requireLoggedIn, async (req, res) => {
+    const { title, post } = req.body;
+
+    if (!title) {
+      req.flash("error", "Title is required!");
+      return res.redirect("/topics/new");
+    }
+
+    if (!post) {
+      req.flash("error", "Post content is required!");
+      return res.redirect("/topics/new");
+    }
+
+    const postDate = new Date();
+
+    const { lastID: threadId } = await db.run(SQL`
+      INSERT INTO threads (author_id, create_date, title) VALUES
+        (
+          ${req.user.id},
+          ${postDate},
+          ${title}
+        )
+    `);
+
+    await db.run(SQL`
+      INSERT INTO thread_replies (thread_id, author_id, reply_date, content) VALUES
+        (
+          ${threadId},
+          ${req.user.id},
+          ${postDate},
+          ${post}
+        )
+    `);
+
+    req.flash("success", "Topic created!");
+    res.redirect(`/topics/${threadId}`);
   });
 
   app.get("/topics/:topic_id", async (req, res, next) => {
@@ -257,8 +299,6 @@ const attachApp = (app, db) => {
       WHERE tr.thread_id = ${threadId}
       ORDER BY tr.id ASC
     `);
-
-    console.log(posts);
 
     res.render("threads/index", { thread, posts });
   });

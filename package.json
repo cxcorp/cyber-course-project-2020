@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "node-dev --inspect --respawn src/index.js"
   },
   "author": "cxcorp",

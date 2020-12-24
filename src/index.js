@@ -32,15 +32,12 @@ try {
   fs.unlinkSync(DB_FILE_NAME);
 } catch (e) {}
 
-sqlite3.verbose();
-
 sqlite
   .open({
     driver: sqlite3.Database,
     filename: DB_FILE_NAME,
   })
   .then(async (db) => {
-    db.on("trace", (d) => console.log(d));
 
     console.log("Running database migrations...");
     await db.migrate({ migrationsPath: MIGRATIONS_PATH });
