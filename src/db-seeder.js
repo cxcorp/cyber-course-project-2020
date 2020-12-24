@@ -27,7 +27,13 @@ const seedDb = async (db, seedsPath) => {
       continue;
     }
     console.log(`Running seed ${file}`);
-    await db.run(sql);
+
+    for (const stmt of sql
+      .split(";")
+      .map((s) => s.trim())
+      .filter((s) => !!s)) {
+      await db.run(stmt + ";");
+    }
 
     await db.run(SQL`INSERT INTO seeds (filename) VALUES (${file})`);
   }

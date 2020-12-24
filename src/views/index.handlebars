@@ -1,13 +1,22 @@
-<h1>Welcome to the Electronics Forum1</h1>
+<h1>Welcome to the Electronics Forum</h1>
 <p>This forum is for electronics enthusiasts. Feel free to say hello!</p>
-<br/>
+<br />
 
 <table>
     <thead>
         <tr>
             <th></th>
             <th>Topic</th>
-            <th></th>
+            <th class="w-20">Author</th>
+            <th class="w-20">Date</th>
         </tr>
     </thead>
+    <tbody>
+        {{#each threads}}
+        <td>▣</td>
+        <td><a href="{{thread_href id}}">{{title}}</a></td>
+        <td>{{author_name}}</td>
+        <td>{{stringify_thread_timestamp create_date}}</td>
+        {{/each}}
+    </tbody>
 </table>

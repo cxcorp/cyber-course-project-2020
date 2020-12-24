@@ -1,0 +1,48 @@
+<!--
+    CREATE TABLE IF NOT EXISTS thread_replies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    thread_id INTEGER NOT NULL REFERENCES threads(id),
+    author_id INTEGER NOT NULL REFERENCES users(id),
+    reply_date DATETIME NOT NULL,
+    content TEXT NOT NULL
+
+    author_name
+);
+     -->
+
+<a class="backlink" href="/">◀ Back to the main page</a>
+
+<div class="thread">
+    <div class="thread__header">
+        <p class="thread__title"><b>Topic: {{thread.title}}</b></p>
+        <p class="thread__date">{{stringify_thread_timestamp thread.create_date}}</p>
+    </div>
+    <div class="thread__replies">
+        {{#each posts}}
+        <div class="thread-reply container">
+            {{#unless (eq @index 0) }}
+            <div class="thread-reply__header row">
+                <div class="col-sm-9 ml-auto">
+                    <p class="thread-reply__header-title">
+                        <b>Re: </b>{{../thread.title}}
+                    </p>
+                    <p class="thread-reply__date">
+                        {{stringify_thread_timestamp reply_date}}
+                    </p>
+                </div>
+            </div>
+            {{/unless}}
+            <div class="thread-reply__content row">
+                <div class="thread-reply__author col-sm-3">
+                    <p class="thread-reply__author-name">
+                        <b>{{author_name}}</b>
+                    </p>
+                </div>
+                <div class="thread-reply__text col-sm-9">
+                    {{breaklines content}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
