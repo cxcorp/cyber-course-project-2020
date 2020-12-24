@@ -35,10 +35,10 @@ const attachApp = (app, db) => {
           return done(null, false, { message: "Invalid password" });
         }
 
-        const user = await db.get(SQL`
-        SELECT * FROM users
-        WHERE username = ${username}
-      `);
+        const user = await db.get(`
+          SELECT * FROM users
+          WHERE username = '${username}'
+        `);
 
         if (!user) {
           return done(null, false, { message: "Invalid username" });
