@@ -17,8 +17,7 @@ module.exports = {
   },
   thread_href: (threadId) => `/topics/${threadId}`,
   breaklines: (str) => {
-    const escaped = Handlebars.Utils.escapeExpression(str);
-    const brd = escaped.replace(/(\r\n|\n|\r)/gm, "<br>");
+    const brd = str.replace(/(\r\n|\n|\r)/gm, "<br>");
     return new Handlebars.SafeString(brd);
   },
   eq: (a, b) => a === b,
