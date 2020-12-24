@@ -35,7 +35,7 @@ See https://nodejs.org/en/download/
 
 Once node and npm are installed (npm comes with node), `cd` into this directory and run `npm i`. This will install all required dependencies. If your node version is too old, you'll probably get an error regarding the sqlite3 dependency's native additions.
 
-If the sqlite3 dependency's installation fails, try installing `libsqlite3`, removing `node_modules/` and running `npm install --build-from-source`. Notes about that [here](https://www.npmjs.com/package/sqlite3#source-install).
+If the sqlite3 dependency's installation fails, ensure you have the *latest* node 12 or node 14. If it still doesn't work, try installing `libsqlite3` (`sudo apt-get install libsqlite3`), removing `node_modules/` and running `npm install --build-from-source`. Notes about that [here](https://www.npmjs.com/package/sqlite3#source-install).
 
 If it still doesn't work, see section "Run with Docker".
 
