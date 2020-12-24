@@ -13,8 +13,8 @@ const getSeedFiles = async (dirPath) => {
 const seedDb = async (db, seedsPath) => {
   const files = await getSeedFiles(seedsPath);
   for (const file of files) {
-    const isAlreadyRun = await db.get(
-      SQL`SELECT COUNT(*) FROM seeds WHERE filename = ${file}`
+    const { count: isAlreadyRun } = await db.get(
+      SQL`SELECT COUNT(*) AS count FROM seeds WHERE filename = ${file}`
     );
     if (isAlreadyRun > 0) {
       continue;
