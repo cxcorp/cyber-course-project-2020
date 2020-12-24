@@ -62,6 +62,11 @@ const attachApp = (app, db) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+  });
+
   app.get("/", async (req, res) => {
     const threads = await db.all(`
       SELECT
@@ -76,7 +81,31 @@ const attachApp = (app, db) => {
     res.render("index", { threads });
   });
 
+  app.get("/login", (req, res) => {
+    if (req.user) {
+      return res.redirect("/");
+    }
+    res.render("login");
+  });
+
+  app.post(
+    "/login",
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+      failureFlash: true,
+    })
+  );
+
+  app.post("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+  });
+
   app.get("/register", async (req, res) => {
+    if (req.user) {
+      return res.redirect("/");
+    }
     res.render("register");
   });
 

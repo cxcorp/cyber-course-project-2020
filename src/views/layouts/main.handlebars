@@ -17,11 +17,22 @@
             <div class="app-header col-xl">
                 <div class="row">
                     <div class="col-auto flex-grow-1">Electronics Forum</div>
+                    {{#if user}}
                     <div class="loginlinks col-auto">
-                        <a href="/login">login</a>
+                        Logged in: <b>cxcorp</b>
+                        &nbsp;
+                        <form style="display: inline" action="/logout" method="POST">
+                            <input type="submit" value="logout" />
+                        </form>
+                    </div>
+                    {{else}}
+                    <div class="loginlinks col-auto">
+                        <a href="/login">log in</a>
                         &nbsp;
                         <a href="/register">register</a>
                     </div>
+                    {{/if}}
+
                 </div>
             </div>
         </header>
