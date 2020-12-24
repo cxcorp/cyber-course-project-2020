@@ -31,6 +31,8 @@ See https://nodejs.org/en/download/package-manager/
 
 See https://nodejs.org/en/download/
 
+After installing node, if you had a terminal open already, make sure you restart your terminal/console window (or editor if using integrated terminal) so that the PATH variable where your terminal searches for `node` is updated.
+
 ### Installing app dependencies
 
 Once node and npm are installed (npm comes with node), `cd` into this directory and run `npm i`. This will install all required dependencies. If your node version is too old, you'll probably get an error regarding the sqlite3 dependency's native additions.
