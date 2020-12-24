@@ -76,7 +76,7 @@ const attachApp = (app, db) => {
   });
 
   app.get("/", async (req, res) => {
-    const threads = await db.all(`
+    const threads = await db.all(SQL`
       SELECT
         t.*,
         u.username AS author_name
