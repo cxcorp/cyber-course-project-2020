@@ -69,8 +69,10 @@ See sample user credentials in `seeds/001-dummy-data.sql`.
 1. [Get Docker](https://docs.docker.com/get-docker/)
 2. Ensure docker is running
 3. Run `sudo docker build . -t cybermooc-forum`
+    - On Windows, `sudo` is not required
 4. Run:
     ```
     sudo docker run --rm --init -it -p 3000:3000 cybermooc-forum
     ```
+    - On Windows, `sudo` is not required
 5. The app is now running at http://localhost:3000. If the port is not free and you get an error related to binding to a port, change the port e.g. `-p 5000:3000` to bind to port 5000.
