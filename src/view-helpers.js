@@ -22,4 +22,27 @@ module.exports = {
     return new Handlebars.SafeString(brd);
   },
   eq: (a, b) => a === b,
+  isNonEmptyArray: (obj) => Array.isArray(obj) && obj.length > 0,
+  flashMessages: function (ctx) {
+    const messages = this.flash;
+    let ret = "";
+    let message;
+
+    while ((message = messages.shift())) {
+      ret += ctx.fn(message);
+    }
+    return ret;
+  },
+  flashclass: (type) => {
+    switch (type) {
+      case "info":
+        return "primary";
+      case "error":
+        return "danger";
+      case "warn":
+        return "warning";
+      default:
+        return type;
+    }
+  },
 };

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS thread_replies (
 );
 
 CREATE INDEX IF NOT EXISTS thread_replies_thread_id ON thread_replies(thread_id);
-
+CREATE INDEX IF NOT EXISTS thread_replies_author_id ON thread_replies(author_id);
 
 --------------------------------------------------------------------------------
 -- Down

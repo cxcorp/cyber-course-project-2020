@@ -17,10 +17,21 @@
             <div class="app-header col-xl">
                 <div class="row">
                     <div class="col-auto flex-grow-1">Electronics Forum</div>
-                    <div class="col-auto">login</div>
+                    <div class="loginlinks col-auto">
+                        <a href="/login">login</a>
+                        &nbsp;
+                        <a href="/register">register</a>
+                    </div>
                 </div>
             </div>
         </header>
+
+        {{#flashMessages}}
+        <div class="alert alert-{{flashclass type}}">
+            {{message}}
+        </div>
+        {{/flashMessages}}
+
         {{{body}}}
 
         <footer class="row mt-auto">

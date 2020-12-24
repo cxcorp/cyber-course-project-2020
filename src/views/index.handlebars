@@ -14,7 +14,7 @@
     <tbody>
         {{#each threads}}
         <td>▣</td>
-        <td><a href="{{thread_href id}}">{{title}}</a></td>
+        <td><a class="topic-list__link" href="{{thread_href id}}">{{title}}</a></td>
         <td>{{author_name}}</td>
         <td>{{stringify_thread_timestamp create_date}}</td>
         {{/each}}

@@ -39,9 +39,17 @@ a {
   width: 20%;
 }
 
+.loginlinks {
+  font-size: 0.8rem;
+}
+
 .backlink {
   color: #0056b3;
   margin-bottom: 1rem;
+}
+
+.topic-list__link {
+  color: #0056b3;
 }
 
 .thread__header {
@@ -74,9 +82,18 @@ a {
 .thread-reply__header-title {
   margin-bottom: 0rem;
 }
+
 .thread-reply__date {
   margin: 0;
   font-size: 0.8rem;
+}
+
+.thread-reply__author-name {
+  margin-bottom: 0rem;
+}
+
+.thread-reply__author-post-count {
+  font-size: 0.85rem;
 }
 
 .thread-reply__content {

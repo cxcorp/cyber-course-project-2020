@@ -4,16 +4,20 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node-dev --respawn src/index.js"
+    "dev": "node-dev --inspect --respawn src/index.js"
   },
   "author": "cxcorp",
   "license": "UNLICENSED",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "flash": "^1.1.0",
     "handlebars": "^4.7.6",
     "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "sql-template-strings": "^2.2.2",
     "sqlite": "^4.0.18",
     "sqlite3": "^5.0.0"
