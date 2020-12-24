@@ -19,10 +19,11 @@
                     <div class="col-auto flex-grow-1">Electronics Forum</div>
                     {{#if user}}
                     <div class="loginlinks col-auto">
-                        Logged in: <b>cxcorp</b>
+                        Logged in: <b>{{user.username}}</b>
                         &nbsp;
+                        <a href="/profile/{{user.id}}" class="btn btn-sm btn-link">profile</a>
                         <form style="display: inline" action="/logout" method="POST">
-                            <input type="submit" value="logout" />
+                            <button class="btn btn-sm btn-link" type="submit">logout</button>
                         </form>
                     </div>
                     {{else}}

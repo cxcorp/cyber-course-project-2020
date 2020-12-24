@@ -1,7 +1,7 @@
 INSERT INTO users (id, username, password) VALUES
-    (1, 'Eric', '202cb962ac59075b964b07152d234b70'),
-    (2, 'soldermaster123', 'bb6a706592737be29c35f35560318eda'),
-    (3, 'tom_from_work', 'd077f244def8a70e5ea758bd8352fcd8');
+    (1, 'Eric', 'eric123'),
+    (2, 'soldermaster123', 'soldermaster'),
+    (3, 'tom_from_work', 'itstom');
 
 INSERT INTO threads (id, author_id, create_date, title) VALUES
     (1, 1, 1608218220234, 'New Hantek DSO2X1X models?');

@@ -99,3 +99,8 @@ a {
 .thread-reply__content {
   padding: 0.5rem 0;
 }
+
+.replybox {
+  border-top: 4px solid #ddd;
+  padding-top: 1rem;
+}

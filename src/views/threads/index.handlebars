@@ -48,4 +48,15 @@
         </div>
         {{/each}}
     </div>
+
+    {{#if user}}
+    <form class="replybox" action="/topics/{{thread.id}}/reply" method="POST">
+        <div class="form-group">
+            <label for="reply-textarea">Post a new reply</label>
+            <textarea class="form-control" id="reply-textarea" name="reply" rows="4"></textarea>
+            <small class="form-text text-muted">Posting as <b>{{user.username}}</b></small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {{/if}}
 </div>

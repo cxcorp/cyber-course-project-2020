@@ -7,6 +7,14 @@ const SQL = require("sql-template-strings");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
+const requireLoggedIn = (req, res, next) => {
+  if (!req.user) {
+    req.flash("error", "You must be logged in to do that");
+    return res.redirect("/");
+  }
+  next();
+};
+
 const attachApp = (app, db) => {
   app.use("/static", express.static(path.join(__dirname, "../public")));
 
@@ -79,6 +87,63 @@ const attachApp = (app, db) => {
     `);
     console.log(threads);
     res.render("index", { threads });
+  });
+
+  app.get("/profile/:uid", requireLoggedIn, async (req, res, next) => {
+    const { uid } = req.params;
+    const userId = parseInt(uid, 10);
+    if (isNaN(userId)) {
+      return next();
+    }
+
+    const user = await db.get(SQL`
+      SELECT
+        u.*,
+        ap.author_posts AS post_count
+      FROM users u
+        INNER JOIN (
+          SELECT author_id, COUNT(author_id) AS author_posts
+          FROM thread_replies
+          GROUP BY author_id
+        ) ap
+          ON ap.author_id = u.id
+      WHERE u.id = ${userId}
+    `);
+
+    if (!user) {
+      return next();
+    }
+
+    res.render("profile", { user });
+  });
+
+  app.post("/profile/:uid/update", requireLoggedIn, async (req, res, next) => {
+    const { uid } = req.params;
+    const userId = parseInt(uid, 10);
+    if (isNaN(userId)) {
+      return next();
+    }
+
+    const user = await db.get(SQL`
+        SELECT * FROM users
+        WHERE id = ${userId}
+      `);
+
+    if (!user) {
+      return next();
+    }
+
+    const { username, password } = req.body;
+    await db.run(SQL`
+      UPDATE users
+      SET
+        username = ${username},
+        password = ${password}
+      WHERE id = ${userId}
+    `);
+
+    req.flash("success", "Your profile has been updated!");
+    res.redirect(`/profile/${userId}`);
   });
 
   app.get("/login", (req, res) => {
@@ -175,15 +240,6 @@ const attachApp = (app, db) => {
       return next();
     }
 
-    /*
-        CREATE TABLE IF NOT EXISTS thread_replies (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    thread_id INTEGER NOT NULL REFERENCES threads(id),
-    author_id INTEGER NOT NULL REFERENCES users(id),
-    reply_date DATETIME NOT NULL,
-    content TEXT NOT NULL
-); */
-
     const posts = await db.all(SQL`
       SELECT
         tr.*,
@@ -206,6 +262,45 @@ const attachApp = (app, db) => {
 
     res.render("threads/index", { thread, posts });
   });
+
+  app.post(
+    "/topics/:topic_id/reply",
+    requireLoggedIn,
+    async (req, res, next) => {
+      const { topic_id } = req.params;
+      const threadId = parseInt(topic_id, 10);
+
+      if (isNaN(threadId)) {
+        return next();
+      }
+
+      const thread = await db.get(
+        SQL`SELECT * FROM threads WHERE id = ${threadId}`
+      );
+      if (!thread) {
+        return next();
+      }
+
+      const { reply } = req.body;
+      if (!reply) {
+        req.flash("error", "Please enter your message!");
+        return res.redirect(`/topics/${threadId}`);
+      }
+
+      await db.run(SQL`
+        INSERT INTO thread_replies (thread_id, author_id, reply_date, content) VALUES
+          (
+            ${threadId},
+            ${req.user.id},
+            ${new Date()},
+            ${reply}
+          )
+      `);
+
+      req.flash("success", "Reply posted!");
+      res.redirect(`/topics/${threadId}`);
+    }
+  );
 
   app.use("*", (req, res) => {
     res.status(404).render("404");
