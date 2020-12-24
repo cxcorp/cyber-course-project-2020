@@ -26,7 +26,7 @@ app.set("view engine", "handlebars");
 
 const { APP_PORT, APP_HOST } = process.env;
 const PORT = APP_PORT || 3000;
-const HOST = APP_HOST || "127.0.0.1";
+const HOST = APP_HOST || "0.0.0.0";
 
 try {
   fs.unlinkSync(DB_FILE_NAME);
@@ -38,7 +38,6 @@ sqlite
     filename: DB_FILE_NAME,
   })
   .then(async (db) => {
-
     console.log("Running database migrations...");
     await db.migrate({ migrationsPath: MIGRATIONS_PATH });
     console.log("Running database seeds...");
