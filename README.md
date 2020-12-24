@@ -41,16 +41,16 @@ If it still doesn't work, see section "Run with Docker".
 
 ### Running
 
-After dependencies have been installed, run `npm start`. This will start the app at http://localhost:3000. If port 3000 is taken, change the port by doing
+After dependencies have been installed, run `npm start`. This will start the app at http://localhost:3000. If port 3000 is taken, change the port via environment variables by doing
 
 ```
-PORT=3001 npm start
+APP_PORT=3001 npm start
 ```
 
-on linux and macOS, or 
+on Linux and macOS, or 
 
 ```
-set PORT=3001
+set APP_PORT=3001
 npm start
 ```
 
